@@ -1,0 +1,102 @@
+$blue-graphite: #223b4b;
+$blue-graphite-light: #2a4b60;
+$night-blue-wiss: #191b43;
+$material-blue: #4051b5;
+$material-pink: #ff4180;
+
+.square-picker {
+    width: 50px;
+    height: 50px;
+    display: inline-flex;
+    cursor: pointer;
+    border: none;
+    align-self: center;
+}
+.selection-box {
+    position: relative;
+    width: 140px;
+    height: 80px;
+    background: white;
+    border: 1px solid black;
+}
+.anchor {
+    position: absolute;
+    cursor: pointer;
+    width: 8px;
+    height: 8px;
+    background-color: black;
+    border-radius: 50%;
+    box-sizing: content-box;
+    outline-offset: 5px;
+}
+
+.anchor:nth-of-type(1) {
+    left: -4px;
+    top: -4px;
+}
+.anchor:nth-of-type(2) {
+    left: 66px;
+    top: -4px;
+}
+.anchor:nth-of-type(3) {
+    right: -4px;
+    top: -4px;
+}
+.anchor:nth-of-type(4) {
+    top: 36px;
+    left: -4px;
+}
+.anchor:nth-of-type(5) {
+    left: 66px;
+    top: 36px;
+}
+.anchor:nth-of-type(6) {
+    right: -4px;
+    top: 36px;
+}
+.anchor:nth-of-type(7) {
+    left: -4px;
+    bottom: -4px;
+}
+.anchor:nth-of-type(8) {
+    left: 66px;
+    bottom: -4px;
+}
+.anchor:nth-of-type(9) {
+    right: -4px;
+    bottom: -4px;
+}
+.round {
+    border-radius: 50%;
+}
+
+.small {
+    width: 20px;
+    height: 20px;
+}
+
+.color-selection {
+    margin: 1rem 0;
+}
+.working-zone {
+    border: none;
+    white-space: nowrap;
+}
+
+.selection-button {
+    display: block;
+    margin: 1rem 0;
+    background-color: $material-blue;
+}
+
+.horiz-center {
+    background-color: $material-blue;
+}
+
+.horiz-center:hover {
+    background-color: #a9a9a9;
+}
+
+.currentToolName {
+    line-height: 1.6em;
+}

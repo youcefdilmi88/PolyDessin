@@ -1,0 +1,553 @@
+<h1 mat-dialog-title>GUIDE D'UTILISATION</h1>
+
+<mat-tab-group class="guide-dialog">
+    <mat-tab label="Divers">
+        <h3 mat-dialog-title>Créer un nouveau dessin</h3>
+        <div class="container">
+            <div class="explication-texte">
+                <p>
+                    L'utilisateur peut créer un nouveau dessin en appuyant sur le premier bouton de la grille présente sur la page d'accueil. Cela
+                    amène directement l'utilisateur à la vue de dessin, étant elle-même composée de la surface de dessin sur laquelle l'utilisateur va
+                    dessiner.
+                </p>
+                <p>
+                    À la création d'un nouveau dessin, la surface de dessin est vide et possède un fond blanc. Ses dimensions en largeur et en hauteur
+                    sont égales à la moitié de la zone de travail. Sa taille minimum est de 250 x 250 pixels. Si la zone de travail a une taille
+                    inférieure à 500 x 500 pixels, alors la taille de la surface de dessin est fixée à sa taille minimale. L'utilisateur peut
+                    redimensionner la surface de dessin avec les points de contrôle sur la bordure de cette dernière.
+                </p>
+                <p>
+                    Il est aussi possible de créer un nouveau dessin à partir de la vue de dessin. En effet, un bouton est issu à cet effet dans la
+                    barre latérale de la vue de dessin.
+                </p>
+            </div>
+            <div class="explication-image">
+                <img src="../../../assets/creer_nouveau_dessin.png" alt="Bouton 1 - Créer un nouveau dessin" width="400" />
+            </div>
+        </div>
+
+        <h3 mat-dialog-title>Continuer un dessin</h3>
+        <div class="container">
+            <div class="explication-texte">
+                <p>
+                    Charge dans son état le plus récent, le dernier dessin ouvert dans l’application Web avant que celle-ci n’ait été fermée. Cette
+                    fonctionnalité a deux objectifs. Premièrement, permettre à l'utilisateur de rapidement poursuivre son travail sans avoir à
+                    sauvegarder puis charger à nouveau le dessin à chaque fois. Ensuite, elle offre la possibilité de récupérer le dessin en cas de
+                    plantage du système ou de l’application.
+                </p>
+                <p>
+                    L’option continuer un dessin compte sur un système de sauvegarde automatique qui fonctionne en arrière-plan sans intervention de
+                    l’utilisateur.
+                </p>
+            </div>
+            <div class="explication-image">
+                <img src="../../../assets/continuer.gif" alt="Bouton 4 - Continuer un dessin" width="400" />
+            </div>
+        </div>
+
+        <h3 mat-dialog-title>Carrousel de dessins</h3>
+        <div class="container">
+            <div class="explication-texte">
+                <p>
+                    Affiche une fenêtre modale contenant un carrousel de dessins sauvegardés sur le serveur. Le carrousel présente les dessins sous
+                    forme de petites fiches comportant chacune : le dessin, le nom du dessin et les étiquettes associées au dessin.
+                </p>
+                <p>
+                    Le carrousel permet de voir trois fiches simulaténement : au centre, la fiche d’intérêt ; à droite, la fiche suivante ; à gauche,
+                    la fiche précédente. Il doit être possible de faire défiler le carrousel en boucle dans un sens ou l’autre à l’aide des flèches du
+                    clavier ou avec la souris via des boutons.
+                </p>
+                <p>
+                    Le contenu du carrousel peut être filtré en spécifiant une ou plusieurs étiquettes. Lorsqu’une ou plusieurs étiquettes sont
+                    sélectionnées, seulement les fiches qui contiennent au moins une des étiquettes font partie du carrousel. Si aucune étiquette
+                    n’est choisie, toutes les fiches sont présentes.
+                </p>
+                <p>
+                    L’utilisateur peut ouvrir (charger) un de ces dessins en cliquant dessus. Cette action fait afficher la vue de dessin qui présente
+                    l’image demandée. Les fiches prévoient aussi un bouton permettant à l’utilisateur de supprimer un dessin du serveur. Tous les
+                    dessins sont publics. Un utilisateur peut donc ouvrir ou supprimer n’importe quel dessin.
+                </p>
+            </div>
+            <div class="explication-image">
+                <img src="../../../assets/ouvrir_carrousel.png" alt="Bouton 2 - Ouvrir le carrousel" width="400" />
+                <img src="../../../assets/carrousel.png" alt="Vue du carrousel" width="400" />
+            </div>
+        </div>
+
+        <h3 mat-dialog-title>Sauvegarde automatique</h3>
+        <div class="container">
+            <div class="explication-texte">
+                <p>
+                    Lorsqu’un dessin est en cours d’édition, une sauvegarde automatique a lieu. La sauvegarde est locale, donc située sur le
+                    navigateur de l’utilisateur. Chaque fois qu’un des trois évènements suivants a lieu, une sauvegarde automatique est déclenchée
+                    juste après : la création d'un dessin ; l'ouverture ou modification d'un dessin ; une modification sur la surface de dessin.
+                </p>
+                <p>
+                    Une modification de la surface de dessin implique soit un changement du contenu de la matrice de pixels, soit un changement au
+                    niveau de sa taille (redimensionnement).
+                </p>
+                <p>
+                    Note : un dessin sauvegardé automatiquement n’a pas d’identité (nom, étiquettes) et ne peut pas être supprimé par l’utilisateur.
+                    Ce dernier ne peut qu’en faire le chargement via « continuer un dessin ». De plus, la pile des actions pour les fonctionnalités «
+                    annuler » et « refaire » n’est pas sauvegardée.
+                </p>
+            </div>
+        </div>
+
+        <h3 mat-dialog-title>Sauvegarde manuelle</h3>
+        <div class="container">
+            <div class="explication-texte">
+                <p>Demande un nom pour la sauvegarde du dessin. Celui-ci est sauvegardé sur le serveur de Polydessin 2 en format PNG.</p>
+                <p>
+                    L’utilisateur peut aussi définir une ou plusieurs étiquettes (tags) associées à son dessin. Des règles de validations pour les
+                    étiquettes sont explicitées dans l'interface utilisateur (nombre de caractères maximal et/ou minimal, limitation à des caractères
+                    alphanumériques, présence ou non des espaces, etc.). L’usage des étiquettes est optionnel et l’utilisateur peut sauvegarder son
+                    dessin sans problème même s’il n’en spécifie aucune. Comme pour la sauvegarde automatique, la pile des actions pour les
+                    fonctionnalités annuler et refaire n'est pas sauvegardée.
+                </p>
+            </div>
+            <div class="explication-image">
+                <img src="../../../assets/sauvegarde.png" alt="Démonstration de sauvegarde manuelle" width="400" />
+            </div>
+        </div>
+
+        <h3 mat-dialog-title>Exportation</h3>
+        <div class="container">
+            <div class="explication-texte">
+                <p>
+                    Offre de créer une image à partir de la surface de dessin et de l’exporter dans un des formats suivants : JPG ou PNG.
+                    L’utilisateur devra entrer un nom pour le fichier exporté.
+                </p>
+                <p>
+                    S’il le souhaite, plutôt que de sauvegarder localement le dessin exporté, l’utilisateur peut l'envoyer par courriel. Dans un tel
+                    cas, l’utilisateur ne devra pas seulement fournir un nom de fichier, mais aussi l’adresse du destinataire.
+                </p>
+                <p>
+                    La fonctionnalité d’exportation permet aussi d’appliquer un filtre sur l’image avant que l’exportation ne soit effectuée. Une
+                    variété de cinq filtres différents est disponible. Par exemple, un filtre retire la couleur de l'image pour la transformer en
+                    niveaux de gris. Bien qu’il y est plusieurs filtres disponibles, il n'est possible d’en appliquer qu’un seul à la fois lors d’une
+                    exportation.
+                </p>
+            </div>
+            <div class="explication-image">
+                <img src="../../../assets/exporter.png" alt="Démonstration de l'exportation" width="400" />
+            </div>
+        </div>
+    </mat-tab>
+
+    <mat-tab label="Dessiner">
+        <h3 mat-dialog-title>Outils</h3>
+        <div class="container">
+            <div class="explication-texte">
+                <p>
+                    Les outils servent à modifier la surface de dessin. La sélection d’un outil se fait via la barre latérale ou par les raccourcis
+                    clavier. Quand un outil est choisi, il devient l’outil actif contrôlé par la souris. Le panneau affiche alors ses attributs
+                    configurables que l’utilisateur peut modifier. L’application mémorise les réglages de chaque outil afin que l’utilisateur n’ait
+                    pas à les reconfigurer à chaque fois.
+                </p>
+                <p>
+                    L’icône du pointeur de la souris représente l’outil actif. Parfois, en fonction du contexte, l’icône du pointeur pour un même
+                    outil peut changer d’apparence pour mieux représenter l’état de l’outil.
+                </p>
+            </div>
+        </div>
+
+        <h3 mat-dialog-title>Annuler-Refaire</h3>
+        <div class="container">
+            <div class="explication-texte">
+                <p>Il est possible d'annuler ou refaire les dernières actions qui menent à la modification de la surface de dessin.</p>
+                <p>
+                    Annuler une action peut se faire avec le raccourci CTRL+Z ou la flèche qui va vers la gauche dans la barre latérale. <br />
+                    Refaire une action peut se faire avec le raccourci CTRL+SHIFT+Z ou la flèche qui va vers la droite dans la barre latérale.
+                </p>
+            </div>
+        </div>
+
+        <h4 mat-dialog-title>1- Outils de traçage :</h4>
+        <div class="container">
+            <div class="explication-texte">
+                <p>
+                    Ces outils sont utilisés en effectuant un glisser-déposer avec le bouton gauche de la souris. Un trait est tracé à partir du
+                    moment où le bouton de la souris est enfoncé jusqu’au moment où il est relâché. Le pointeur de la souris doit se trouver au-dessus
+                    de la surface de dessin lorsque le bouton est initialement enfoncé. Si ce n’est pas le cas, le glisser-déposer n’aura aucun effet.
+                </p>
+                <p>
+                    Pendant une opération de traçage, l’utilisateur peut déplacer le pointeur de la souris hors de la surface de dessin. Il n’y aura
+                    évidemment rien qui se dessine à cet endroit, mais tant que le bouton reste enfoncé, l’action de traçage reste active. Cela veut
+                    dire que si le pointeur est ramené sur la surface de dessin, le traçage continue.
+                </p>
+                <p>
+                    Relâcher le bouton termine l’opération de traçage, et ce peu importe où se trouve le pointeur de la souris. Notez qu’un trait ne
+                    comportant aucun déplacement est quand même valide. Cela prendra généralement la forme d’un simple point ou trace selon l’outil
+                    employé.
+                </p>
+            </div>
+        </div>
+
+        <h3 mat-dialog-title>1.1- Crayon</h3>
+        <div class="container">
+            <div class="explication-texte">
+                <p>
+                    Le crayon est l’outil de base du logiciel de dessin. Il ne sert qu’à faire de simples traits sans texture particulière. Il a une
+                    pointe ronde et est accessible facilement en appuyant sur la touche C du clavier.
+                </p>
+                <p>L'épaisseur de son trait en pixels est modifiable.</p>
+            </div>
+            <div class="explication-image">
+                <img src="../../../assets/crayon.gif" alt="Démonstration du crayon" width="400" />
+            </div>
+        </div>
+
+        <h3 mat-dialog-title>1.2- Pinceau</h3>
+        <div class="container">
+            <div class="explication-texte">
+                <p>
+                    Cet outil est similaire au crayon. Il n’en diffère que par la texture du trait. L’application offre un choix de cinq textures
+                    différentes et est accessible grâce à la touche W du clavier.
+                </p>
+                <p>L'épaisseur de son trait en pixels est modifiable ainsi que la texture selectionnée.</p>
+            </div>
+            <div class="explication-image">
+                <img src="../../../assets/pinceau.gif" alt="Démonstration du pinceau" width="400" />
+            </div>
+        </div>
+
+        <h3 mat-dialog-title>1.3- Efface</h3>
+        <div class="container">
+            <div class="explication-texte">
+                <p>
+                    Cet outil permet d’effacer (rendre blanc) des pixels de la surface de dessin. Lorsque le clic gauche de la souris est enfoncé,
+                    tous les pixels se trouvant sous l’icône du pointeur de la souris deviennent blancs. Si le bouton gauche est maintenu enfoncé et
+                    que la souris est déplacée, tous les prochains pixels qui entrent en contact avec l’icône pendant son déplacement deviennent
+                    blancs eux aussi.
+                </p>
+                <p>
+                    Pour représenter l’efface, l’icône du pointeur de la souris est un carré blanc avec une mince bordure noire. L'efface est
+                    accessible avec la touche E, et l'attribut modifiable de cet outil est la taille de l'efface en pixels.
+                </p>
+            </div>
+            <div class="explication-image">
+                <img src="../../../assets/efface.gif" alt="Démonstration de l'efface" width="400" />
+            </div>
+        </div>
+
+        <h3 mat-dialog-title>1.4- Plume</h3>
+        <div class="container">
+            <div class="explication-texte">
+                <p>
+                    Cet outil permet de dessiner en donnant l'effet d'une plume.Il est possible configurer la longueur (en pixels) ainsi que l'angle
+                    d’orientation (en degrés) de la ligne. La forme de sa pointe est une ligne mince et il y a la possibilité de choisir l'épaisseur
+                    de celle-ci. On peut également changer l’angle de la ligne à l’aide de la roulette de la souris. À chaque cran de roulette, une
+                    rotation de 15 degrés est effectuée. Si la touche ALT est appuyé, la rotation est de 1 degré.
+                </p>
+                <p>Il est possible de sélectionner l'outil Plume avec la touche P.</p>
+            </div>
+            <div class="explication-image">
+                <img src="../../../assets/plume.gif" alt="Démonstration de la plume" width="400" />
+            </div>
+        </div>
+
+        <h3 mat-dialog-title>1.5- Aérosol</h3>
+        <div class="container">
+            <div class="explication-texte">
+                <p>
+                    Cet outil permet vaporiser sur la surface de dessin comme un jet de peinture à des intervals réguliers tant que le bouton gauche
+                    de la souris est enfoncé. Le motif de vaporisation est aléatoire à chaque émission. Il est possible de configurer le nombre
+                    d’émissions par seconde, le diamètre des gouttelettes du jet et le diamètre du jet en pixels de l'outil.
+                </p>
+                <p>Il est possible de sélectionner l'outil Aérosol avec la touche A.</p>
+            </div>
+            <div class="explication-image">
+                <img src="../../../assets/aerosol.gif" alt="Démonstration de l'aérosol" width="400" />
+            </div>
+        </div>
+
+        <h4 mat-dialog-title>2- Outils de forme :</h4>
+        <div class="container">
+            <div class="explication-texte">
+                <p>
+                    Ces outils sont utilisés en effectuant un glisser-déposer avec le bouton gauche de la souris. Un trait est tracé à partir du
+                    moment où le bouton de la souris est enfoncé jusqu’au moment où il est relâché. Le pointeur de la souris doit se trouver au-dessus
+                    de la surface de dessin lorsque le bouton est initialement enfoncé. Si ce n’est pas le cas, le glisser-déposer n’aura aucun effet.
+                </p>
+
+                <p>
+                    Pendant la construction d’une forme, si l’utilisateur appuie sur la touche d’échappement (Escape), l’opération est annulée.
+                    L’aperçu de la forme, ainsi que le périmètre dans lequel il est inscrit sont alors retirés. La forme est dessinée avec la couleur
+                    principale, et le contour avec la couleur secondaire.
+                </p>
+            </div>
+        </div>
+
+        <h3 mat-dialog-title>2.1 - Rectangle</h3>
+        <div class="container">
+            <div class="explication-texte">
+                <p>
+                    Cet outil permet de dessiner des rectangles. À tout moment pendant la première ou la deuxième étape de la création, si la touche
+                    Shift est maintenue appuyée, la forme à créer sera un carré plutôt qu’un rectangle. Celui-ci occupera la plus grande aire possible
+                    et est ancré au coin initial du rectangle d’encadrement.
+                </p>
+                <p>
+                    L'outil rectangle est accessible avec la touche 1. Ses attributs modifiables sont le type de tracé (avec ou sans contours) et
+                    l'épaisseur du trait en pixels.
+                </p>
+            </div>
+            <div class="explication-image">
+                <img src="../../../assets/rectangle.gif" alt="Démonstration du rectangle" width="400" />
+            </div>
+        </div>
+
+        <h3 mat-dialog-title>2.2 - Ellipse</h3>
+        <div class="container">
+            <div class="explication-texte">
+                <p>
+                    Cet outil adopte le même comportement que celui permettant de dessiner des rectangles. La seule différence est que la forme
+                    dessinée est une ellipse. Comme pour l’outil rectangle, l’utilisation de la touche Shift a un effet. Ici, elle transforme
+                    l’ellipse en cercle.
+                </p>
+                <p>
+                    Accessible avec la touche 2, ses attributs modifiables sont comme pour le rectangle : le type de tracé (avec ou sans contours), et
+                    l'épaisseur du trait en pixels.
+                </p>
+            </div>
+            <div class="explication-image"><img src="../../../assets/ellipse.gif" alt="Démonstration de l'ellipse" width="400" /></div>
+        </div>
+
+        <h3 mat-dialog-title>2.3 - Ligne</h3>
+        <div class="container">
+            <div class="explication-texte">
+                <p>
+                    Cet outil permet de tracer une ligne composée d’un ou plusieurs segments. Un premier clic définit la position de départ de la
+                    ligne. Ensuite, chaque clic qui suit « connecte » avec le clic qui le précède pour former un segment de la ligne. Tous les clics
+                    doivent être faits sur la surface de dessin. Cliquer hors de cette dernière n’aura aucun effet.
+                </p>
+                <p>
+                    Il est aussi possible à l’utilisateur de facilement créer des segments alignés de sorte que l’angle entre eux et l’axe des x soit
+                    un multiple de 45 degrés. Si la touche Shift est enfoncée, le segment temporaire s'oriente selon l’un des angles suivants : 0, 45,
+                    90, 135, 180, 225, 270 ou 315 degrés. La position à utiliser est celle se trouvant la plus près du segment avant que la touche
+                    Shift ne soit enfoncée. Ce nouvel alignement reste en vigueur tant que la touche Shift est maintenue enfoncée. Dès que la touche
+                    est relâchée, le segment temporaire recommence à utiliser la position du pointeur de la souris pour son deuxième point.
+                </p>
+                <p>
+                    Un double-clic indique qu’il s’agit du dernier point. Un dernier segment est alors formé et la ligne est terminée. Pendant la
+                    construction d’une ligne, si l’utilisateur appuie sur la touche d’échappement (Escape), la totalité de la ligne est annulée. Si
+                    l’utilisateur appuie sur la touche de retour arrière (Backspace), le point le plus récent est supprimé. S’il s’agit du premier
+                    point, celui-ci n’est toutefois pas supprimé.
+                </p>
+                <p>
+                    Accessible avec la touche L, ses attributs modifiables sont : le type de jonction (avec ou sans point) ; l'épaisseur de la ligne
+                    en pixels ; le diamètre des points de jonction.
+                </p>
+            </div>
+            <div class="explication-image">
+                <img src="../../../assets/ligne.gif" alt="Démonstration de la ligne" width="400" />
+            </div>
+        </div>
+
+        <h3 mat-dialog-title>2.4 - Polygone</h3>
+        <div class="container">
+            <div class="explication-texte">
+                <p>
+                    Cet outil permet de dessiner des polygones dur la surface de dessin en faisant un glisser-déposer. Il est possible de configurer
+                    le nombre de côtés du polygone (3 à 12) ainsi que l'épaisseur du contour. De plus, il est possible de choisir le type de tracé
+                    (Contour, Plein ou Plein avec contour). L'intérieur est dessiné avec la couleur principale et le contour est dessiné avec la
+                    couleur secondaire.
+                </p>
+                <p>Accessible avec la touche 3.</p>
+            </div>
+            <div class="explication-image">
+                <img src="../../../assets/polygone.gif" alt="Démonstration du polygone" width="400" />
+            </div>
+        </div>
+
+        <h3 mat-dialog-title>2.5- Texte</h3>
+        <div class="container">
+            <div class="explication-texte">
+                <p>
+                    Cet outil permet écrire du texte. Il est possible de configurer la police du texte, la taille de la police, les mutateurs (gras
+                    et/ou italique) ainsi que l'alignement du texte (gauche, centre, droit). De plus, on peut se déplacer dans le texte avec les
+                    touches directionnelles (flèches) du clavier et supprimer avec la touche de retour arrière (Backspace) ou la touche de suppression
+                    (Delete) pendant l'édition du texte. Un indicateur visuel indique la position du curseur dans le texte. Il est également possible
+                    de faire un saut de ligne avec la touche d'entrée(Enter) et d'annuler l'édition du texte avec la touche d'échappement (Escape). On
+                    peut terminer l'édition du texte en cliquant à l'extérieur de la zone de texte ou en sélectionnant un autre outil.
+                </p>
+                <p>Il est possible de sélectionner l'outil Texte avec la touche T.</p>
+            </div>
+            <div class="explication-image">
+                <img src="../../../assets/texte.gif" alt="Démonstration du texte" width="400" />
+            </div>
+        </div>
+
+        <h3 mat-dialog-title>Palette de couleur</h3>
+        <div class="container">
+            <div class="explication-texte">
+                <p>
+                    Parmi les attributs dictant le comportement des outils, la couleur fait exception. Il s’agit d’un attribut « universel » qui n’est
+                    pas mémorisé pour chaque outil, mais plutôt partagé par tous les outils. Il est en tout temps présent sur le panneau d’attributs,
+                    même si l’outil actif n’en fait pas usage. C’est par exemple le cas pour les outils de sélection.
+                </p>
+
+                <p>
+                    Le panneau d’attributs contient deux couleurs configurables. Nous les appelons les couleurs principale et secondaire. Le panneau
+                    possède un bouton permettant d’intervertir ces deux couleurs. Pour modifier l’une ou l’autre des couleurs, l’utilisateur doit
+                    cliquer dessus. Cette action fait apparaitre une palette de couleurs à partir de laquelle il pourra en choisir une nouvelle. Une
+                    fois la couleur choisie et confirmée, la palette est masquée.
+                </p>
+
+                <p>
+                    Pour permettre à l’utilisateur d’être plus précis, la palette offre aussi la possibilité d’y entrer les valeurs de rouge, vert et
+                    bleu manuellement dans des champs texte. Les valeurs sont spécifiées en hexadécimale. Un outil utilise toujours la couleur
+                    principale pour dessiner. La couleur secondaire est utilisée pour les contours lorsqu’il y en a.
+                </p>
+            </div>
+            <div class="explication-image">
+                <img src="../../../assets/couleur.gif" alt="Démonstration de la palette de couleur" width="400" />
+            </div>
+        </div>
+
+        <h3 mat-dialog-title>Sceau de peinture</h3>
+        <div class="container">
+            <div class="explication-texte">
+                <p>
+                    Cet outil permet de remplir une région de la couleur principale de 2 façons différentes. Il est possible de remplir uniquement des
+                    pixels voisins de la même couleur avec le bouton gauche de la souris ou bien tous les pixels de la même couleur que le pixel
+                    inital avec le bouton droit. De plus, il y a la possibilité de configurer la tolérance d'écart (en pourcentage)) pour le
+                    remplissage.
+                </p>
+                <p>Accessible avec la touche B.</p>
+            </div>
+            <div class="explication-image">
+                <img src="../../../assets/sceau-de-peinture.gif" alt="Démonstration du sceau de peinture" width="400" />
+            </div>
+        </div>
+
+        <h3 mat-dialog-title>Pipette</h3>
+        <div class="container">
+            <div class="explication-texte">
+                <p>
+                    Cet outil permet de choisir une couleur. La couleur saisie est celle du pixel sous le pointeur de la souris. La couleur principale
+                    peut être assignée avec le click gauche de la souris et l'assignation de la couleur secondaire se fait avec le click droit de
+                    celle-ci. La couleur perçue est visible dans le cercle de prévisualisation de la barre latérale.
+                </p>
+                <p>Accessible avec la touche I.</p>
+            </div>
+            <div class="explication-image">
+                <img src="../../../assets/pipette.gif" alt="Démonstration de la pipette" width="400" />
+            </div>
+        </div>
+
+        <h3 mat-dialog-title>Étampe</h3>
+        <div class="container">
+            <div class="explication-texte">
+                <p>
+                    Cet outil permet de déposer des étampes parmi une sur la surface de dessin en faisant un clic du bouton gauche. Il est possible de
+                    configurer le facteur de mise à échelle de l'étampe, l'angle d'orientation de l'étampe en degrés et le choix de l'étampe parmi 5.
+                    Le changement d'angle de l'étampe se fait avec la roulette de la souris. À chaque cran de roulette, une rotation de 15 degrés est
+                    effectuée. Si la touche ALT est appuyé, la rotation est de 1 degré.
+                </p>
+                <p>Il est possible de sélectionner l'outil étampe avec la touche D.</p>
+            </div>
+            <div class="explication-image">
+                <img src="../../../assets/etampe.gif" alt="Démonstration de l'étampe" width="400" />
+            </div>
+        </div>
+
+        <h4 mat-dialog-title>Sélection :</h4>
+        <h3 mat-dialog-title>Sélection par rectangle et ellipse</h3>
+        <div class="container">
+            <div class="explication-texte">
+                <p>
+                    Cet outil permet de sélectionner un ou plusieurs pixels en effectuant un glisser-déposer avec la forme préférée. Ainsi, il est
+                    possible de manipuler la sélection à l'aide de plusieurs mouvements.
+                </p>
+                <p>
+                    Selection par rectangle avec la touche R. Possibilité de forcer l'outil l'outil à faire un carré avec la touche Shift.<br />
+                    Selection par ellipse avec la touche S. Possibilité de forcer l'outil l'outil à faire un cercle avec la touche Shift.<br />
+                </p>
+            </div>
+            <div class="explication-image">
+                <img src="../../../assets/selection-rectangle.gif" alt="Démonstration de la sélection par rectangle" width="400" />
+            </div>
+            <div class="explication-image">
+                <img src="../../../assets/selection-ellipse.gif" alt="Démonstration de la sélection par ellipse" width="400" />
+            </div>
+        </div>
+
+        <h3 mat-dialog-title>Déplacement d'une sélection</h3>
+        <div class="container">
+            <div class="explication-texte">
+                <p>
+                    Cet outil permet de déplacer une sélection. Il est possible de déplacer une sélection avec la souris à l'aide d'un glisser-déposer
+                    avec le bouton gauche de la souris ainsi qu'avec les touches directionnelles (flêches) du clavier.
+                </p>
+            </div>
+        </div>
+
+        <h3 mat-dialog-title>Rotation d'une sélection</h3>
+        <div class="container">
+            <div class="explication-texte">
+                <p>
+                    Cet outil permet de faire pivoter une sélection autour de son centre avec la roulette de la souris. Il est aussi possible changer
+                    le degré de rotation à l’aide de la roulette de la souris. À chaque cran de roulette, une rotation de 15 degrés est effectuée. Si
+                    la touche ALT est enfoncée, la rotation est de 1 degré.
+                </p>
+            </div>
+            <div class="explication-image">
+                <img src="../../../assets/rotation.gif" alt="Démonstration de la rotation pour une sélection" width="400" />
+            </div>
+        </div>
+
+        <h3 mat-dialog-title>Manipulations de sélections et presse-papier</h3>
+        <div class="container">
+            <div class="explication-texte">
+                <p>
+                    Cet outil permet de couper, copier, coller et supprimer une sélection et ceci requière un presse-papier (clipboard en anglais). Le
+                    presse-papier doit stocker l'information des objets à manipuler. Il est possible de copier une sélection avec le raccourci CTRL +
+                    C. Il est possible de couper une sélection avec le raccourci CTRL + X. Il est possible de coller ce qui se trouve dans le
+                    presse-papier avec le raccourci CTRL + V. Il est possible de supprimer une sélection avec le raccourci DELETE.
+                </p>
+            </div>
+            <div class="explication-image">
+                <img src="../../../assets/manipulation.gif" alt="Démonstration de la manipulation de sélection et presse-papier" width="400" />
+            </div>
+        </div>
+
+        <h3 mat-dialog-title>Grille</h3>
+        <div class="container">
+            <div class="explication-texte">
+                <p>
+                    Cet outil permet d'afficher une grille superposée à la surface de dessin et son contenu. Son point d'origine est le coin supérieur
+                    gauche. Il est possible de l'activer ou la désactiver avec la touche G, de lui assigner une valeur d'opacité et finalement
+                    d’indiquer la taille (en pixels) des carrés la composant. Il est possible d'augmenter la taille des carrés de la gille au prochain
+                    multiple de 5 avec la touche + et de la diminuer de la même façon avec la touche -.
+                </p>
+            </div>
+            <div class="explication-image">
+                <img src="../../../assets/grille.gif" alt="Démonstration de la grille" width="400" />
+            </div>
+        </div>
+
+        <h3 mat-dialog-title>Magnétisme à l'aide d'une sélection</h3>
+        <div class="container">
+            <div class="explication-texte">
+                <p>
+                    Cet outil permet d'activer une option de magnétisme. Il est possible de choisir le point utilisé pour l'alignement sur la grille.
+                    Il faut choisir entre les 9 points suivants : un des quatre points de contrôle, un des quatre coins de la boîte englobante ou le
+                    centre de la boîte. La touche M permet d'activer et de désactiver le magnétisme.
+                </p>
+                <p>
+                    Lorsque l'on déplace une sélection avec la souris, la sélection s'aligne sur l'intersection de la grille la plus proche en X et Y.
+                    Lorsque l'on déplace une sélection avec les touches directionnelle, la sélection s'aligne avec l'intersection de la grille la plus
+                    proche en X et Y. Il n'est pas nécessaire de voir la grille affichée pour pouvoir utiliser l'option de magnétisme.
+                </p>
+            </div>
+            <div class="explication-image">
+                <img src="../../../assets/magnetisme.gif" alt="Démonstration du magnétisme pour la sélection" width="400" />
+            </div>
+        </div>
+    </mat-tab>
+</mat-tab-group>
+
+<mat-dialog-actions>
+    <button mat-button mat-dialog-close>Fermer</button>
+</mat-dialog-actions>

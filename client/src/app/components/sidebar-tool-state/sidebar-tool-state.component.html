@@ -1,0 +1,522 @@
+<div>
+    <div class="currentToolName">
+        <span><strong>Outil courant -</strong> {{ getCurrentToolName() }}</span>
+        <hr />
+        <br />
+    </div>
+    <div class="line-width" *ngIf="this.toolsUsingLineWidth.includes(this.currentTool)">
+        <div>
+            <span>Épaisseur du trait : </span><b class="lineWidthValue">{{ this.currentLineWidth }}px</b>
+        </div>
+
+        <mat-slider
+            color="primary"
+            #lineWidthSize
+            (change)="handleLineWidthSelection($event)"
+            step="1"
+            [min]="this.currentTool === localToolEnum.Eraser ? 5 : 1"
+            max="30"
+            [value]="this.currentLineWidth"
+            (input)="this.currentLineWidth = $event.value"
+        >
+        </mat-slider>
+    </div>
+
+    <div *ngIf="this.currentTool === localToolEnum.Brush">
+        <button class="selection-button" color="primary" mat-flat-button [matMenuTriggerFor]="menuTexture">
+            {{ this.currentBrushTexture }}
+        </button>
+
+        <mat-menu #menuTexture="matMenu">
+            <button mat-menu-item color="primary" id="Texture 1" (click)="handleClickBrushTextureSelection($event)">
+                <img src="../../../assets/Texture1.PNG" />
+            </button>
+            <button mat-menu-item color=" primary" id="Texture 2" (click)="handleClickBrushTextureSelection($event)">
+                <img src="../../../assets/Texture2.PNG" />
+            </button>
+            <button mat-menu-item color="primary" id="Texture 3" (click)="handleClickBrushTextureSelection($event)">
+                <img src="../../../assets/Texture3.PNG" />
+            </button>
+            <button mat-menu-item color="primary" id="Texture 4" (click)="handleClickBrushTextureSelection($event)">
+                <img src="../../../assets/Texture4.PNG" />
+            </button>
+            <button mat-menu-item color="primary" id="Texture 5" (click)="handleClickBrushTextureSelection($event)">
+                <img src="../../../assets/Texture5.PNG" />
+            </button>
+        </mat-menu>
+    </div>
+
+    <div *ngIf="this.currentTool == localToolEnum.Spray">
+        <div>
+            <span>Nombre d'émissions par seconde : </span><b class="intervalValue">{{ this.currentSprayInterval }}</b>
+        </div>
+
+        <mat-slider
+            color="primary"
+            #interval
+            (change)="handleEmissionInterval($event)"
+            step="20"
+            min="100"
+            max="700"
+            [value]="this.currentSprayInterval"
+            (input)="this.currentSprayInterval = $event.value"
+        >
+        </mat-slider>
+
+        <div>
+            <span>Diamètre du jet : </span><b class="sprayDiameterValue">{{ this.currentSprayDiameter }}px</b>
+        </div>
+
+        <mat-slider
+            color="primary"
+            #sprayDiameter
+            (change)="handleSprayDiameterSelection($event)"
+            step="1"
+            min="5"
+            max="50"
+            [value]="this.currentSprayDiameter"
+            (input)="this.currentSprayDiameter = $event.value"
+        >
+        </mat-slider>
+
+        <div>
+            <span>Diamètre des gouttelettes de jet : </span><b class="dotDiameterValue">{{ this.currentSprayDotDiameter }}px</b>
+        </div>
+
+        <mat-slider
+            color="primary"
+            #dotDiameter
+            (change)="handleDotDiameterSelection($event)"
+            step="1"
+            min="1"
+            max="10"
+            [value]="this.currentSprayDotDiameter"
+            (input)="this.currentSprayDotDiameter = $event.value"
+        >
+        </mat-slider>
+    </div>
+
+    <div *ngIf="this.currentTool == localToolEnum.Rectangle">
+        <button class="selection-button" color="primary" mat-flat-button [matMenuTriggerFor]="menuShape">
+            {{ this.currentRectangleBehavior }}
+        </button>
+    </div>
+
+    <!--Feather -->
+    <div class="line-height" *ngIf="this.currentTool == localToolEnum.Feather">
+        <div>
+            <span>Longueur de la ligne : </span><b class="lineHeightValue">{{ this.currentFeatherLineHeight }}px</b>
+        </div>
+        <mat-slider
+            color="primary"
+            #lineHeightSize
+            (change)="handleFeatherLineHeightSelection($event)"
+            step="1"
+            [min]="1"
+            max="30"
+            [value]="this.currentFeatherLineHeight"
+            (input)="this.currentFeatherLineHeight = $event.value"
+        >
+        </mat-slider>
+    </div>
+
+    <div class="angle" *ngIf="this.currentTool === localToolEnum.Feather">
+        <div>
+            <span>Angle: </span><b class="angleValue">{{ this.currentFeatherAngle }}</b>
+        </div>
+
+        <mat-slider
+            color="primary"
+            #angle
+            (change)="updateFeatherAngle($event)"
+            step="1"
+            [min]="-180"
+            max="180"
+            [value]="this.currentFeatherAngle"
+            (input)="this.currentFeatherAngle = $event.value"
+        >
+        </mat-slider>
+    </div>
+
+    <div *ngIf="this.currentTool === localToolEnum.Ellipse">
+        <button class="selection-button" color="primary" mat-flat-button [matMenuTriggerFor]="menuShape">
+            {{ this.currentRectangleBehavior }}
+        </button>
+    </div>
+
+    <div *ngIf="this.currentTool == localToolEnum.Polygon">
+        <button class="selection-button" color="primary" mat-flat-button [matMenuTriggerFor]="menuShape">
+            {{ this.currentRectangleBehavior }}
+        </button>
+        <div>
+            <span>Nombre de côtés: </span><b class="scaleValue">{{ this.currentSidesNumber }}</b>
+        </div>
+
+        <mat-slider
+            color="primary"
+            #sidesNumber
+            (change)="handleSidesNumberSelection($event)"
+            step="1"
+            min="3"
+            max="12"
+            [value]="this.currentSidesNumber"
+            (input)="this.currentSidesNumber = $event.value"
+        >
+        </mat-slider>
+    </div>
+
+    <div>
+        <mat-menu #menuShape="matMenu">
+            <button mat-menu-item color="primary" id="Contour seulement" (click)="handleClickRectangleBehavior($event)">Contour seulement</button>
+            <button mat-menu-item color="primary" id="Plein sans contour" (click)="handleClickRectangleBehavior($event)">Plein sans contour</button>
+            <button mat-menu-item color="primary" id="Plein avec contour" (click)="handleClickRectangleBehavior($event)">Plein avec contour</button>
+        </mat-menu>
+    </div>
+
+    <div *ngIf="this.currentTool == localToolEnum.PaintBucket">
+        <div>
+            <span>Tolérance : </span><b class="toleranceValue">{{ this.currentPaintBucketTolerance }}%</b>
+        </div>
+
+        <mat-slider
+            color="primary"
+            (change)="handleToleranceSelection($event)"
+            step="1"
+            min="0"
+            max="100"
+            [value]="this.currentPaintBucketTolerance"
+            (input)="this.currentPaintBucketTolerance = $event.value"
+        >
+        </mat-slider>
+    </div>
+
+    <!-- Stamp-->
+    <div *ngIf="this.currentTool === localToolEnum.Stamp">
+        <div>
+            <span>Mise à échelle : </span><b class="scaleValue">{{ this.currentStampScale }}</b>
+        </div>
+
+        <mat-slider
+            color="primary"
+            #scale
+            (change)="handleScaleSelection($event)"
+            step="0.1"
+            min="0.1"
+            max="5.0"
+            [value]="this.currentStampScale"
+            (input)="this.currentStampScale = $event.value"
+        >
+        </mat-slider>
+
+        <div>
+            <span>Angle : </span><b class="angleValue">{{ this.currentStampAngle }}</b>
+        </div>
+
+        <mat-slider
+            color="primary"
+            #angle
+            (change)="handleStampAngle($event)"
+            step="1"
+            min="-180"
+            max="180"
+            [value]="this.currentStampAngle"
+            (input)="this.currentStampAngle = $event.value"
+        >
+        </mat-slider>
+
+        <button class="selection-button" color="primary" mat-flat-button [matMenuTriggerFor]="menuStamp">
+            {{ this.currentStamp }}
+        </button>
+
+        <mat-menu #menuStamp="matMenu">
+            <button mat-menu-item color="primary" id="Étampe 1" (click)="handleStampSelection($event)">
+                <img src="../../../assets/Stamp1.png" width="50" height="50" />
+            </button>
+            <button mat-menu-item color=" primary" id="Étampe 2" (click)="handleStampSelection($event)">
+                <img src="../../../assets/Stamp2.png" width="70" height="50" />
+            </button>
+            <button mat-menu-item color="primary" id="Étampe 3" (click)="handleStampSelection($event)">
+                <img src="../../../assets/Stamp3.png" width="70" height="50" />
+            </button>
+            <button mat-menu-item color="primary" id="Étampe 4" (click)="handleStampSelection($event)">
+                <img src="../../../assets/Stamp4.png" width="50" height="50" />
+            </button>
+            <button mat-menu-item color="primary" id="Étampe 5" (click)="handleStampSelection($event)">
+                <img src="../../../assets/Stamp5.png" width="50" height="50" />
+            </button>
+        </mat-menu>
+    </div>
+
+    <div class="angle" *ngIf="this.currentTool === localToolEnum.SelectionRectangle || this.currentTool === localToolEnum.SelectionEllipse">
+        <div>
+            <span>Angle: </span><b class="angleValue">{{ this.currentSelectionAngle }}</b>
+        </div>
+
+        <mat-slider
+            color="primary"
+            #angle
+            (change)="handleSelectionAngle($event)"
+            step="1"
+            [min]="-180"
+            max="180"
+            [value]="this.currentSelectionAngle"
+            (input)="this.currentSelectionAngle = $event.value"
+        >
+        </mat-slider>
+    </div>
+
+    <div class="color">
+        Couleur primaire :<br />
+        <div class="color-selection">
+            <div
+                class="square-picker"
+                (click)="assignPrimaryColor()"
+                [style.background]="isTransparent(currentPrimaryColor)"
+                mat-flat-button
+                [matMenuTriggerFor]="menuColor"
+            ></div>
+        </div>
+        <div>
+            <button mat-mini-fab class="horiz-center" color="primary" (click)="invertPrimaryAndSecondaryColor()">
+                <mat-icon>autorenew</mat-icon>
+            </button>
+        </div>
+        <br />Couleur secondaire : <br />
+        <div class="color-selection">
+            <div
+                class="square-picker"
+                (click)="assignSecondaryColor()"
+                [style.background]="isTransparent(currentSecondaryColor)"
+                mat-flat-button
+                [matMenuTriggerFor]="menuColor"
+            ></div>
+        </div>
+        <mat-menu #menuColor="matMenu">
+            <app-color-picker
+                (click)="$event.stopPropagation()"
+                (alphaOutput)="onAlphaOutput($event)"
+                (colorOutput)="onColorChange($event)"
+                class="color-picker"
+            ></app-color-picker>
+        </mat-menu>
+    </div>
+    <br />
+    <br />
+    <div *ngIf="this.currentTool === localToolEnum.SelectionEllipse || this.currentTool === localToolEnum.SelectionRectangle">
+        <div>
+            <button mat-mini-fab title="Copier 'Ctrl + c'" color="primary" (click)="clipboardService.copy()">
+                <mat-icon>content_copy</mat-icon>
+            </button>
+            <button mat-mini-fab title="Coller 'Ctrl + v'" color="primary" (click)="clipboardService.paste()">
+                <mat-icon>content_paste</mat-icon>
+            </button>
+            <button mat-mini-fab title="Couper 'Ctrl + x'" color="primary" (click)="clipboardService.cut()">
+                <mat-icon>content_cut</mat-icon>
+            </button>
+            <button mat-mini-fab title="Supprimer 'Suppr.'" color="primary" (click)="clipboardService.delete()">
+                <mat-icon>delete</mat-icon>
+            </button>
+        </div>
+        <br />
+        <br />
+        <button color="primary" mat-flat-button title="Magnétisme 'm'" (click)="toggleMagnetism()">Magnétisme</button>
+        <br />
+        <br />
+        <div *ngIf="this.toolManagerService.isMagnetismOn">
+            <div>Choix de l'ancrage :</div>
+            <br />
+
+            <div class="selection-box">
+                <div
+                    class="anchor"
+                    id="top-left"
+                    [ngStyle]="{
+                        outline: this.toolManagerService.currentMagnetAnchor === localMagnetAnchorEnum.TopLeft ? '1px solid black' : 'none'
+                    }"
+                    (click)="selectAnchorMagnet($event)"
+                ></div>
+                <div
+                    class="anchor"
+                    id="top-center"
+                    [ngStyle]="{
+                        outline: this.toolManagerService.currentMagnetAnchor === localMagnetAnchorEnum.TopCenter ? '1px solid black' : 'none'
+                    }"
+                    (click)="selectAnchorMagnet($event)"
+                ></div>
+                <div
+                    class="anchor"
+                    id="top-right"
+                    [ngStyle]="{
+                        outline: this.toolManagerService.currentMagnetAnchor === localMagnetAnchorEnum.TopRight ? '1px solid black' : 'none'
+                    }"
+                    (click)="selectAnchorMagnet($event)"
+                ></div>
+                <div
+                    class="anchor"
+                    id="center-left"
+                    [ngStyle]="{
+                        outline: this.toolManagerService.currentMagnetAnchor === localMagnetAnchorEnum.CenterLeft ? '1px solid black' : 'none'
+                    }"
+                    (click)="selectAnchorMagnet($event)"
+                ></div>
+                <div
+                    class="anchor"
+                    id="center-center"
+                    [ngStyle]="{
+                        outline: this.toolManagerService.currentMagnetAnchor === localMagnetAnchorEnum.CenterCenter ? '1px solid black' : 'none'
+                    }"
+                    (click)="selectAnchorMagnet($event)"
+                ></div>
+                <div
+                    class="anchor"
+                    id="center-right"
+                    [ngStyle]="{
+                        outline: this.toolManagerService.currentMagnetAnchor === localMagnetAnchorEnum.CenterRight ? '1px solid black' : 'none'
+                    }"
+                    (click)="selectAnchorMagnet($event)"
+                ></div>
+                <div
+                    class="anchor"
+                    id="bottom-left"
+                    [ngStyle]="{
+                        outline: this.toolManagerService.currentMagnetAnchor === localMagnetAnchorEnum.BottomLeft ? '1px solid black' : 'none'
+                    }"
+                    (click)="selectAnchorMagnet($event)"
+                ></div>
+                <div
+                    class="anchor"
+                    id="bottom-center"
+                    [ngStyle]="{
+                        outline: this.toolManagerService.currentMagnetAnchor === localMagnetAnchorEnum.BottomCenter ? '1px solid black' : 'none'
+                    }"
+                    (click)="selectAnchorMagnet($event)"
+                ></div>
+                <div
+                    class="anchor"
+                    id="bottom-right"
+                    [ngStyle]="{
+                        outline: this.toolManagerService.currentMagnetAnchor === localMagnetAnchorEnum.BottomRight ? '1px solid black' : 'none'
+                    }"
+                    (click)="selectAnchorMagnet($event)"
+                ></div>
+            </div>
+        </div>
+    </div>
+    <br />
+    <div *ngIf="this.toolManagerService.isGridOn">
+        <div>
+            <span>Carrés grille : </span><b>{{ this.toolManagerService.currentGridSquareSize }}px</b>
+        </div>
+
+        <mat-slider
+            color="primary"
+            (change)="handleGridSquareSizeSelection($event)"
+            step="5"
+            min="20"
+            max="200"
+            [value]="this.toolManagerService.currentGridSquareSize"
+        >
+        </mat-slider>
+        <div>
+            <span>Opacité grille : </span><b>{{ this.toolManagerService.currentGridOpacity }}%</b>
+        </div>
+
+        <mat-slider
+            color="primary"
+            (change)="handleGridOpacitySelection($event)"
+            step="5"
+            min="10"
+            max="100"
+            [value]="this.toolManagerService.currentGridOpacity"
+        >
+        </mat-slider>
+    </div>
+
+    <div *ngIf="this.currentTool == localToolEnum.Text">
+        <br />
+        Police : <br />
+        <button class="selection-button" color="primary" mat-flat-button [matMenuTriggerFor]="menuFont">
+            {{ this.currentFont }}
+        </button>
+        <mat-menu #menuFont="matMenu">
+            <div *ngFor="let i of this.textService.fonts">
+                <button mat-menu-item color="primary" id="{{ i }}" (click)="handleFontSelection($event)">{{ i }}</button>
+            </div>
+        </mat-menu>
+        <div>
+            <br />
+            Taille : <br />
+            <button class="selection-button" color="primary" mat-flat-button [matMenuTriggerFor]="menuSize">
+                {{ this.currentFontSize }}
+            </button>
+            <mat-menu #menuSize="matMenu">
+                <div *ngFor="let j of this.textService.size">
+                    <button mat-menu-item color="primary" id="{{ j }}" (click)="handleFontSizeSelection($event)">{{ j }}</button>
+                </div>
+            </mat-menu>
+
+            <button
+                mat-mini-fab
+                title="Gras"
+                [ngStyle]="{ 'background-color': this.currentBoldStatus ? '#a9a9a9' : '#223b4b' }"
+                color="primary"
+                (click)="handleBold($event)"
+            >
+                <mat-icon>format_bold</mat-icon>
+            </button>
+            <button
+                mat-mini-fab
+                title="Italique"
+                [ngStyle]="{ 'background-color': this.currentItalicStatus ? '#a9a9a9' : '#223b4b' }"
+                color="primary"
+                (click)="handleItalic($event)"
+            >
+                <mat-icon>format_italic</mat-icon>
+            </button>
+            <br />
+
+            <button
+                mat-mini-fab
+                title="Aligner à gauche"
+                [ngStyle]="{ 'background-color': this.textService.currentAlignmentLeft ? '#a9a9a9' : '#223b4b' }"
+                color="primary"
+                (click)="handleAlignment('left')"
+            >
+                <mat-icon>format_align_left</mat-icon>
+            </button>
+
+            <button
+                mat-mini-fab
+                title="Aligner au centre"
+                [ngStyle]="{ 'background-color': this.textService.currentAlignmentCenter ? '#a9a9a9' : '#223b4b' }"
+                color="primary"
+                (click)="handleAlignment('center')"
+            >
+                <mat-icon>format_align_center</mat-icon>
+            </button>
+
+            <button
+                mat-mini-fab
+                title="Aligner à droite"
+                [ngStyle]="{ 'background-color': this.textService.currentAlignmentRight ? '#a9a9a9' : '#223b4b' }"
+                color="primary"
+                (click)="handleAlignment('right')"
+            >
+                <mat-icon>format_align_right</mat-icon>
+            </button>
+        </div>
+    </div>
+
+    <br />
+
+    <div
+        id="canvas-container"
+        class="color-selection"
+        [style.visibility]="currentTool === 8 && this.eyeDropperService.isCircleVisible ? 'visible' : 'hidden'"
+        style="margin-top: 20; margin-left: 20"
+    >
+        Couleur détectée :<br /><br />
+        <canvas class="working-zone round" id="canvasImg" #canvasImg [attr.width]="65" [attr.height]="65"></canvas>
+        <div class="square-picker round small" [style.background]="setEyeDropColor(this.eyeDropperService.currentColor)"></div>
+    </div>
+</div>

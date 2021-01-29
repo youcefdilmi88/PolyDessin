@@ -1,0 +1,19 @@
+<div class="color-wrapper">
+    <app-color-palette [hue]="hue" (color)="onColorChange($event)"></app-color-palette>
+    <app-color-slider (color)="onHueChange($event)" style="margin-left: 16px"></app-color-slider>
+</div>
+<div class="input-wrapper">
+    <input class="text" (keyup.enter)="saveColor($event)" [value]="color.substring(0, 7)" />
+    <div [matMenuTriggerFor]="menuColor" class="color-div" [ngStyle]="{ 'background-color': color || 'white' }"></div>
+    <mat-menu #menuColor="matMenu">
+        <div *ngFor="let savedColor of this.savedColors">
+            <div (click)="selectFromHistory(savedColor)" [ngStyle]="{ 'background-color': savedColor || 'white' }" class="square-picker"></div>
+        </div>
+    </mat-menu>
+</div>
+<div>
+    <div>
+        <span>Opacité : </span><b class="opacityValue">{{ opacity.value }}%</b>
+    </div>
+    <mat-slider color="primary" #opacity step="1" min="0" max="100" [value]="opacity" (change)="onOpacityChange($event)"></mat-slider>
+</div>

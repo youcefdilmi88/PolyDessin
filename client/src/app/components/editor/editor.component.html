@@ -1,0 +1,10 @@
+<div class="editor-container">
+    <div class="grid-container">
+        <div class="grid-child"><app-sidebar></app-sidebar></div>
+        <div class="grid-child"><app-sidebar-tool-state [colorInput]="this.currentColor"></app-sidebar-tool-state></div>
+    </div>
+
+    <div #workingZone class="working-zone">
+        <app-drawing id="CANVAS" class="drawing" tabindex="0"></app-drawing>
+    </div>
+</div>

@@ -1,0 +1,67 @@
+<div>
+    <h2 class="float-left" mat-dialog-title>Sauvegardez votre dessin dans la base de données :</h2>
+    <mat-spinner *ngIf="showSpinner" class="spinner" [diameter]="35"></mat-spinner>
+</div>
+<mat-dialog-content class="save-dialog">
+    <div class="validation">
+        <h4>Règles de validation</h4>
+        <li>
+            Titre
+            <ul class="regles">
+                <li>Chiffres ou lettres</li>
+                <li>Max 15 caractères</li>
+                <li>Titre obligatoire</li>
+            </ul>
+        </li>
+        <li>
+            Tags
+            <ul class="regles">
+                <li>Chiffres ou lettres</li>
+                <li>Sans espaces</li>
+                <li>Max 9 caractères</li>
+            </ul>
+        </li>
+    </div>
+    <div class="input">
+        <p>
+            <mat-form-field>
+                <mat-label>Titre du dessin</mat-label>
+                <input #titleInput matInput [formControl]="titleFormControl" [errorStateMatcher]="matcher" />
+                <mat-error *ngIf="titleFormControl.hasError('maxlength') && !titleFormControl.hasError('required')">Max 15 caractères</mat-error>
+                <mat-error *ngIf="titleFormControl.hasError('pattern') && !titleFormControl.hasError('required')"
+                    >Chiffres ou lettres ou espace</mat-error
+                >
+                <mat-error *ngIf="titleFormControl.hasError('required')">Le titre est requis</mat-error>
+            </mat-form-field>
+        </p>
+        <p>
+            <mat-form-field>
+                <mat-label>Tags</mat-label>
+                <input
+                    matInput
+                    placeholder="Nouveau tag..."
+                    [matChipInputFor]="chipList"
+                    [matChipInputSeparatorKeyCodes]="separatorKeysCodes"
+                    [matChipInputAddOnBlur]="addOnBlur"
+                    (matChipInputTokenEnd)="add($event)"
+                    [formControl]="tagFormControl"
+                    [errorStateMatcher]="matcher"
+                />
+                <mat-error *ngIf="tagFormControl.hasError('maxlength')">Max 9 caractères</mat-error>
+                <mat-error *ngIf="tagFormControl.hasError('pattern')">Chiffres ou lettres, sans espaces</mat-error>
+            </mat-form-field>
+        </p>
+        <span class="margins"><mat-checkbox (change)="setPNG($event.checked)">Format PNG</mat-checkbox></span>
+    </div>
+    <mat-chip-list #chipList aria-label="tag selection">
+        <mat-chip *ngFor="let tag of tags" [selectable]="selectable" [removable]="removable" (removed)="remove(tag)">
+            {{ tag }}
+            <mat-icon matChipRemove *ngIf="removable">cancel</mat-icon>
+        </mat-chip>
+    </mat-chip-list>
+</mat-dialog-content>
+
+<mat-dialog-actions align="end">
+    <button mat-button mat-dialog-close cdkFocusInitial (click)="cancel()">Annuler</button>
+    <button mat-button [disabled]="isDisabledDialog()" id="ctrl+s" (click)="saveDrawing()">Sauvegarder</button>
+</mat-dialog-actions>

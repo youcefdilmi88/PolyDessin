@@ -1,0 +1,431 @@
+<!-- Retour au point d'entrée -->
+<div>
+    <button mat-mini-fab title="Retour à la page d'accueil" class="horiz-center" color="primary" (click)="backHome()" routerLink="/home">
+        <mat-icon>arrow_back</mat-icon>
+    </button>
+</div>
+
+<!-- Nouveau dessin -->
+<div>
+    <button mat-mini-fab title="Créer un nouveau dessin 'Ctrl+O'" class="horiz-center" (keydown)="onKeydown($event)" (click)="openNewDrawingDialog()">
+        <mat-icon>add</mat-icon>
+    </button>
+</div>
+
+<!-- Guide d'utilisation -->
+<div>
+    <button mat-mini-fab title="Guide d'utilisation" class="horiz-center" color="primary" (click)="openUserManualDialog()">
+        <mat-icon>menu_book</mat-icon>
+    </button>
+</div>
+
+<!-- Efface -->
+<div>
+    <button
+        mat-mini-fab
+        title="Efface 'e'"
+        class="horiz-center"
+        [ngStyle]="{ 'background-color': this.toolManagerService.currentTool.toolName == 3 ? '#a9a9a9' : '#223b4b' }"
+        id="e"
+        (click)="handleClickToolSelection($event)"
+    >
+        <!-- icon de Icons8 : https://icons8.com/icon/set/eraser/material
+        -->
+        <svg xmlns="http://www.w3.org/2000/svg" x="0px" y="0px" width="24" height="24" viewBox="0 0 172 172" style="fill: #000000">
+            <g
+                fill="none"
+                fill-rule="nonzero"
+                stroke="none"
+                stroke-width="1"
+                stroke-linecap="butt"
+                stroke-linejoin="miter"
+                stroke-miterlimit="10"
+                stroke-dasharray=""
+                stroke-dashoffset="0"
+                font-family="none"
+                font-weight="none"
+                font-size="none"
+                text-anchor="none"
+                style="mix-blend-mode: normal"
+            >
+                <path d="M0,172v-172h172v172z" fill="none"></path>
+                <g fill="#ffffff">
+                    <path
+                        d="M104.58854,14.78125c-5.20703,0 -10.38607,2.09961 -14.33333,6.04688l-69.42708,69.42708c-7.92253,7.92253 -7.92253,20.74414 0,28.66667l29.33854,29.5625c1.31576,1.28776 3.07943,1.98763 4.92708,2.01563h102.57292v-14.33333h-59.34896l53.75,-53.75c7.92253,-7.92253 7.92253,-20.74414 0,-28.66667l-33.14583,-32.92187c-3.94726,-3.94726 -9.1263,-6.04687 -14.33333,-6.04687zM63.15625,68.08333l41.43229,41.43229l-26.65104,26.65104h-19.70833l-27.32292,-27.32292c-2.1276,-2.1276 -2.1276,-6.38281 0,-8.51042z"
+                    ></path>
+                </g>
+            </g>
+        </svg>
+    </button>
+</div>
+
+<!-- Séparateur -->
+<hr />
+
+<!-- Crayon -->
+<div>
+    <button
+        mat-mini-fab
+        title="Crayon 'c'"
+        class="horiz-center"
+        [ngStyle]="{ 'background-color': this.toolManagerService.currentTool.toolName == 0 ? '#a9a9a9' : '#223b4b' }"
+        id="c"
+        (click)="handleClickToolSelection($event)"
+    >
+        <mat-icon>create</mat-icon>
+    </button>
+</div>
+
+<!-- Pinceau -->
+<div>
+    <button
+        mat-mini-fab
+        title="Pinceau 'w'"
+        class="horiz-center"
+        [ngStyle]="{ 'background-color': this.toolManagerService.currentTool.toolName == 1 ? '#a9a9a9' : '#223b4b' }"
+        id="w"
+        (click)="handleClickToolSelection($event)"
+    >
+        <mat-icon>brush</mat-icon>
+    </button>
+</div>
+
+<!-- Plume -->
+<div>
+    <button
+        mat-mini-fab
+        title="Plume 'p'"
+        class="horiz-center"
+        [ngStyle]="{ 'background-color': this.toolManagerService.currentTool.toolName == 13 ? '#a9a9a9' : '#223b4b' }"
+        id="p"
+        (click)="handleClickToolSelection($event)"
+    >
+        <!-- icon de Icons8 : https://icons8.com/icon/set/fountain%20pen/material -->
+        <svg xmlns="http://www.w3.org/2000/svg" x="0px" y="0px" width="24" height="24" viewBox="0 0 172 172" style="fill: #000000">
+            <g transform="">
+                <g
+                    fill="none"
+                    fill-rule="nonzero"
+                    stroke="none"
+                    stroke-width="1"
+                    stroke-linecap="butt"
+                    stroke-linejoin="miter"
+                    stroke-miterlimit="10"
+                    stroke-dasharray=""
+                    stroke-dashoffset="0"
+                    font-family="none"
+                    font-weight="none"
+                    font-size="none"
+                    text-anchor="none"
+                    style="mix-blend-mode: normal"
+                >
+                    <path d="M0,172v-172h172v172z" fill="none"></path>
+                    <path d="" fill="none"></path>
+                    <g fill="#ffffff">
+                        <path
+                            d="M120.4,17.2l-17.2,17.2l34.4,34.4l17.2,-17.2zM92.13646,45.90026c-2.79714,-0.0817 -5.63013,0.85848 -7.88333,2.81068l-0.0112,-0.0224c-6.06587,6.06587 -15.44192,8.64479 -26.90859,8.64479c-9.40267,0 -15.63381,5.79022 -18.91328,16.74089c-9.82693,32.8348 -17.48613,56.22564 -20.08906,64.30964l0.03359,0.0112c-0.72813,1.4964 -1.16458,3.16095 -1.16458,4.93828c0,1.02053 0.17899,1.98786 0.42552,2.93386l45.86667,-45.86667c-0.24653,-0.946 -0.42552,-1.91332 -0.42552,-2.93386c0,-6.33533 5.13133,-11.46667 11.46667,-11.46667c3.1648,0 6.03182,1.28391 8.10729,3.35938c2.07547,2.07547 3.35938,4.94249 3.35938,8.10729c0,6.33533 -5.13133,11.46667 -11.46667,11.46667c-1.02053,0 -1.98786,-0.17899 -2.93386,-0.42552l-45.86667,45.86667c0.946,0.24653 1.91332,0.42552 2.93385,0.42552c1.77733,0 3.44188,-0.43099 4.93828,-1.15339l0.0112,0.02239c8.084,-2.60293 31.47483,-10.25093 64.30963,-20.07786c10.95067,-3.2852 16.74089,-9.52181 16.74089,-18.92448c0,-11.46667 2.57892,-20.84272 8.64479,-26.90859l-0.02239,-0.0112c3.9044,-4.5064 3.7677,-11.31044 -0.51511,-15.5875l-11.46667,-11.46667l-11.46667,-11.46667c-2.14139,-2.1414 -4.90702,-3.24408 -7.70417,-3.32578z"
+                        ></path>
+                    </g>
+                </g>
+            </g>
+        </svg>
+    </button>
+</div>
+
+<!-- Aerosol -->
+<div>
+    <button
+        mat-mini-fab
+        title="Aerosol 'a'"
+        class="horiz-center"
+        [ngStyle]="{ 'background-color': this.toolManagerService.currentTool.toolName == 11 ? '#a9a9a9' : '#223b4b' }"
+        id="a"
+        (click)="handleClickToolSelection($event)"
+    >
+        <mat-icon>blur_on</mat-icon>
+    </button>
+</div>
+
+<!-- Séparateur -->
+<hr />
+
+<!-- Rectangle -->
+<div>
+    <button
+        mat-mini-fab
+        title="Rectangle '1'"
+        class="horiz-center"
+        [ngStyle]="{ 'background-color': this.toolManagerService.currentTool.toolName == 4 ? '#a9a9a9' : '#223b4b' }"
+        #rectangle
+        id="1"
+        (click)="handleClickToolSelection($event)"
+    >
+        <mat-icon>crop_5_4</mat-icon>
+    </button>
+</div>
+
+<!-- Ellipse -->
+<div>
+    <button
+        mat-mini-fab
+        title="Ellipse '2'"
+        class="horiz-center"
+        [ngStyle]="{ 'background-color': this.toolManagerService.currentTool.toolName == 5 ? '#a9a9a9' : '#223b4b' }"
+        #rectangle
+        id="2"
+        (click)="handleClickToolSelection($event)"
+    >
+        <mat-icon>panorama_fish_eye</mat-icon>
+    </button>
+</div>
+
+<!-- Ligne -->
+<div>
+    <button
+        mat-mini-fab
+        title="Ligne 'l'"
+        class="horiz-center"
+        [ngStyle]="{ 'background-color': this.toolManagerService.currentTool.toolName == 2 ? '#a9a9a9' : '#223b4b' }"
+        id="l"
+        (click)="handleClickToolSelection($event)"
+    >
+        <!-- icon de Icons8 : https://icons8.com/icon/set/line/material -->
+        <svg xmlns="http://www.w3.org/2000/svg" x="0px" y="0px" width="24" height="24" viewBox="0 0 172 172" style="fill: #000000">
+            <g
+                fill="none"
+                fill-rule="nonzero"
+                stroke="none"
+                stroke-width="1"
+                stroke-linecap="butt"
+                stroke-linejoin="miter"
+                stroke-miterlimit="10"
+                stroke-dasharray=""
+                stroke-dashoffset="0"
+                font-family="none"
+                font-weight="none"
+                font-size="none"
+                text-anchor="none"
+                style="mix-blend-mode: normal"
+            >
+                <path
+                    d="M58.81706,14.27734l-10.13411,10.13411l19.94629,19.94629l-41.4043,40.11653l-0.04199,0.042c-8.26713,8.26713 -8.26713,21.93925 0,30.20637l36.5472,36.5472c8.26714,8.26713 21.58008,8.62629 29.49251,0.71386l36.54721,-36.5472c8.26713,-8.26714 8.26713,-21.93924 0,-30.20638l-14.33333,-14.33333zM78.74935,54.49186l26.55306,26.53907l14.33333,14.33333c1.59977,1.59976 2.39356,3.28442 2.39356,4.96907h-86.93783c-0.25887,-1.92147 0.39909,-3.85644 2.22559,-5.68294zM143.33333,114.66667c0,0 -14.33333,20.78333 -14.33333,28.66667c0,7.88333 6.45,14.33333 14.33333,14.33333c7.88333,0 14.33333,-6.45 14.33333,-14.33333c0,-7.88333 -14.33333,-28.66667 -14.33333,-28.66667z"
+                ></path>
+                <g fill="#ffffff"><path d="M145.43294,16.43294l-129,129l10.13411,10.13411l129,-129z"></path></g>
+            </g>
+        </svg>
+    </button>
+</div>
+
+<!-- Polygone -->
+<div>
+    <button
+        mat-mini-fab
+        title="Polygone '3'"
+        class="horiz-center"
+        [ngStyle]="{ 'background-color': this.toolManagerService.currentTool.toolName == 6 ? '#a9a9a9' : '#223b4b' }"
+        #polygone
+        id="3"
+        (click)="handleClickToolSelection($event)"
+    >
+        <mat-icon>category</mat-icon>
+    </button>
+</div>
+
+<!-- Séparateur -->
+<hr />
+
+<!-- Sceau de peinture -->
+<div>
+    <button
+        mat-mini-fab
+        title="Sceau de peinture 'b'"
+        class="horiz-center"
+        [ngStyle]="{ 'background-color': this.toolManagerService.currentTool.toolName == 7 ? '#a9a9a9' : '#223b4b' }"
+        id="b"
+        (click)="handleClickToolSelection($event)"
+    >
+        <svg xmlns="http://www.w3.org/2000/svg" x="0px" y="0px" width="24" height="24" viewBox="0 0 172 172" style="fill: #000000">
+            <g
+                fill="none"
+                fill-rule="nonzero"
+                stroke="none"
+                stroke-width="1"
+                stroke-linecap="butt"
+                stroke-linejoin="miter"
+                stroke-miterlimit="10"
+                stroke-dasharray=""
+                stroke-dashoffset="0"
+                font-family="none"
+                font-weight="none"
+                font-size="none"
+                text-anchor="none"
+                style="mix-blend-mode: normal"
+            >
+                <path d="M0,172v-172h172v172z" fill="none"></path>
+                <g fill="#ffffff">
+                    <path
+                        d="M58.81706,14.27734l-10.13411,10.13411l19.94629,19.94629l-41.4043,40.11653l-0.04199,0.042c-8.26713,8.26713 -8.26713,21.93925 0,30.20637l36.5472,36.5472c8.26714,8.26713 21.58008,8.62629 29.49251,0.71386l36.54721,-36.5472c8.26713,-8.26714 8.26713,-21.93924 0,-30.20638l-14.33333,-14.33333zM78.74935,54.49186l26.55306,26.53907l14.33333,14.33333c1.59977,1.59976 2.39356,3.28442 2.39356,4.96907h-86.93783c-0.25887,-1.92147 0.39909,-3.85644 2.22559,-5.68294zM143.33333,114.66667c0,0 -14.33333,20.78333 -14.33333,28.66667c0,7.88333 6.45,14.33333 14.33333,14.33333c7.88333,0 14.33333,-6.45 14.33333,-14.33333c0,-7.88333 -14.33333,-28.66667 -14.33333,-28.66667z"
+                    ></path>
+                </g>
+            </g>
+        </svg>
+    </button>
+</div>
+
+<!-- Pipette -->
+<div>
+    <button
+        mat-mini-fab
+        title="Pipette 'i'"
+        class="horiz-center"
+        [ngStyle]="{ 'background-color': this.toolManagerService.currentTool.toolName == 8 ? '#a9a9a9' : '#223b4b' }"
+        id="i"
+        (click)="handleClickToolSelection($event)"
+    >
+        <mat-icon>colorize</mat-icon>
+    </button>
+</div>
+
+<!-- Etampe -->
+<div>
+    <button
+        mat-mini-fab
+        title="Etampe 'd'"
+        class="horiz-center"
+        [ngStyle]="{ 'background-color': this.toolManagerService.currentTool.toolName == 14 ? '#a9a9a9' : '#223b4b' }"
+        id="d"
+        (click)="handleStampToolSelection($event)"
+    >
+        <img
+            src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABkAAAAZCAYAAADE6YVjAAAABmJLR0QA/wD/AP+gvaeTAAABg0lEQVRIie2Tvy8EcRDFP8Ml/AEaCVeQ+HEKjbhCJBKNQqIVUfjRo9PQXzSCWqci110hXERLRUMiREKiECWVk6eZlbXubu9XNLxkM3kz331v5rs78I8qYHEHJI0Dq0B3kfIdkDGzk5o7kJSWVFB5vEsaLqfTFOMzDzQDOSANDIWetOcTwEI5kUSMSYfHrJmdR4uSssBk6FxRxE3y5rGvRL3f42uMTmlImgnd/WakthWqTdds4mLrkj5cbMRzo84LktbqMggZHbjosvMV5/uVvP/14SUlgFmK33+vxylJ7UDwy/ZJyhQ5fw3smdlHtNudmH2oFtuBtoVMHoBOYBd4qeQaSqANWAQezSwZneTZOxiowwBJA67zHOTKLqOkCSAJnJrZjaQ0MAhcmtmZpB5gDHgws8NKOvgxiaSc5+acbzjfcD7nPFfzJMAF0AI8Ob8F8h7xfN7PxeO3vok8piS11uHTFdH71sFxY9bjC0eBdnhPuoAtIFXHFAGugCUzu2+A1l/DJ5PSy2KWsS3MAAAAAElFTkSuQmCC"
+        />
+    </button>
+</div>
+
+<!-- Texte -->
+<div>
+    <button
+        mat-mini-fab
+        title="Texte 't'"
+        class="horiz-center"
+        [ngStyle]="{ 'background-color': this.toolManagerService.currentTool.toolName == 12 ? '#a9a9a9' : '#223b4b' }"
+        #rectangle
+        id="t"
+        (click)="handleClickToolSelection($event)"
+    >
+        <mat-icon>text_format</mat-icon>
+    </button>
+</div>
+
+<!-- Séparateur -->
+<hr />
+
+<!-- Annuler -->
+<div>
+    <button
+        mat-mini-fab
+        title="Annuler 'Ctrl+Z'"
+        class="horiz-center"
+        [style.backgroundColor]="checkUndo() ? '#223b4b' : '#223b4b'"
+        [ngStyle]="{ color: checkUndo() ? '#545454' : '#ffffff' }"
+        #rectangle
+        (click)="this.undoRedoService.undo()"
+    >
+        <mat-icon>undo</mat-icon>
+    </button>
+</div>
+
+<!-- Refaire -->
+<div>
+    <button
+        mat-mini-fab
+        title="Refaire 'Ctrl+Shift+Z'"
+        class="horiz-center"
+        [style.backgroundColor]="checkRedo() ? '#223b4b' : '#223b4b'"
+        [ngStyle]="{ color: checkRedo() ? '#545454' : '#ffffff' }"
+        #rectangle
+        (click)="this.undoRedoService.redo()"
+    >
+        <mat-icon>redo</mat-icon>
+    </button>
+</div>
+
+<!-- Séparateur -->
+<hr />
+
+<!-- Selection Rectangle -->
+<div>
+    <button
+        mat-mini-fab
+        title="Selection Rectangle 'r'"
+        class="horiz-center"
+        [ngStyle]="{ 'background-color': this.toolManagerService.currentTool.toolName == 9 ? '#a9a9a9' : '#223b4b' }"
+        id="r"
+        (click)="handleClickToolSelection($event)"
+    >
+        <mat-icon>fullscreen</mat-icon>
+    </button>
+</div>
+
+<!-- Selection Ellipse -->
+<div>
+    <button
+        mat-mini-fab
+        title="Selection Ellipse 's'"
+        class="horiz-center"
+        [ngStyle]="{ 'background-color': this.toolManagerService.currentTool.toolName == 10 ? '#a9a9a9' : '#223b4b' }"
+        id="s"
+        (click)="handleClickToolSelection($event)"
+    >
+        <mat-icon>filter_tilt_shift</mat-icon>
+    </button>
+</div>
+
+<!-- Grille -->
+<div>
+    <button
+        mat-mini-fab
+        title="Grille 'g'"
+        class="horiz-center"
+        [ngStyle]="{ 'background-color': isGridOn ? '#a9a9a9' : '#223b4b' }"
+        id="g"
+        (click)="handleClickToggleGrid()"
+    >
+        <mat-icon>grid_on</mat-icon>
+    </button>
+</div>
+
+<!-- Séparateur -->
+<hr />
+
+<!-- Sauvegarder dessin -->
+<div>
+    <button mat-mini-fab title="Sauvegarder 'Ctrl+S'" class="horiz-center" color="primary" (click)="openSaveDrawingDialog()">
+        <mat-icon>save</mat-icon>
+    </button>
+</div>
+
+<!-- Exporter le dessin -->
+<div>
+    <button mat-mini-fab title="Exporter 'Ctrl+E'" class="horiz-center" color="primary" (click)="openExportDialog()">
+        <mat-icon>get_app</mat-icon>
+    </button>
+</div>
+
+<!-- Voir le carrousel -->
+<div>
+    <button mat-mini-fab title="Carrousel de dessins 'Ctrl+G'" class="horiz-center" color="primary" (click)="openCarrouselDialog()">
+        <mat-icon>view_carousel</mat-icon>
+    </button>
+</div>
+
+<!--Envoyer par email-->
+<div>
+    <button mat-mini-fab title="Envoyer un email 'Ctrl+E'" class="horiz-center" color="primary" (click)="openSendByEmailDialog()">
+        <mat-icon>email</mat-icon>
+    </button>
+</div>
+
+<!-- Liens pour Icons8 -->
+<!-- <a href="https://icons8.com/icon/6223/erase"></a>
+<a href="https://icons8.com/icon/98486/line"></a> -->

@@ -1,0 +1,77 @@
+$gray: #d9d9d9;
+$gray-light: #ededed;
+$blue-graphite: #223b4b;
+$blue-graphite-light: #2a4b60;
+$night-blue-wiss: #191b43;
+
+.editor-container {
+    position: absolute;
+    display: grid;
+    top: 0;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    grid-template-columns: 350px 1fr;
+    min-width: 550px;
+}
+
+.grid-container {
+    height: 100vh;
+    display: grid;
+    grid-template-columns: 0.2fr 2fr;
+    grid-template-rows: repeat (3);
+}
+
+.grid-child:first-child {
+    overflow-y: scroll;
+    width: 105px;
+    padding: 0.5rem;
+    background-color: $blue-graphite;
+}
+
+.grid-child:first-child::-webkit-scrollbar {
+    width: 12px;
+}
+
+.grid-child:first-child::-webkit-scrollbar-track {
+    -webkit-box-shadow: inset 0 0 6px rgba(0, 0, 0, 0.3);
+    border-radius: 10px;
+}
+
+.grid-child:first-child::-webkit-scrollbar-thumb {
+    border-radius: 10px;
+    -webkit-box-shadow: inset 0 0 6px rgba(255, 255, 255, 255);
+}
+
+.grid-child:nth-child(2) {
+    padding: 1.3rem;
+    background-color: $gray;
+    color: black;
+
+    overflow-y: scroll;
+}
+
+.grid-child:nth-child(3) {
+    grid-column: 1 / span 2;
+    grid-row: 2 / span 1;
+}
+
+.drawing {
+    display: grid;
+    width: min-content;
+    outline: none;
+}
+
+.working-zone {
+    height: 100vh;
+    min-height: 200px;
+    min-width: 50px;
+    border-left: 2px none;
+    background-color: $gray-light;
+    overflow: auto;
+    white-space: nowrap;
+}
+
+div {
+    margin: 0;
+}

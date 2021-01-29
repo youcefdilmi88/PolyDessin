@@ -1,0 +1,40 @@
+<mat-dialog-content class="export-dialog">
+    <div>
+        <h2 class="float-left" mat-dialog-title>Exportez localement votre dessin et envoyez-le par courriel :</h2>
+        <mat-spinner *ngIf="showSpinner" class="spinner" [diameter]="35"></mat-spinner>
+    </div>
+    <mat-form-field>
+        <mat-label>Titre du dessin</mat-label>
+        <input #titleInput matInput [formControl]="titleFormControl" [errorStateMatcher]="matcher" />
+        <mat-error *ngIf="titleFormControl.hasError('maxlength') && !titleFormControl.hasError('required')">Max 15 caractères</mat-error>
+        <mat-error *ngIf="titleFormControl.hasError('pattern') && !titleFormControl.hasError('required')">Chiffres ou lettres</mat-error>
+        <mat-error *ngIf="titleFormControl.hasError('required')">Le titre est requis</mat-error>
+    </mat-form-field>
+    <mat-form-field style="margin-left: 20px">
+        <mat-label>Adresse courriel</mat-label>
+        <input #emailInput matInput [formControl]="emailFormControl" [errorStateMatcher]="matcher" />
+        <mat-error *ngIf="emailFormControl.hasError('email') && !emailFormControl.hasError('required')">Adresse non valide</mat-error>
+        <mat-error *ngIf="emailFormControl.hasError('required')">L'adresse courriel est requise</mat-error>
+    </mat-form-field>
+    <br />
+    <mat-button-toggle-group (change)="selectFormat($event)" name="typeImage">
+        <mat-button-toggle value="png">PNG</mat-button-toggle>
+        <mat-button-toggle value="jpg" [checked]="true">JPG</mat-button-toggle>
+    </mat-button-toggle-group>
+    <h3>Filtres :</h3>
+    <mat-button-toggle-group name="filters">
+        <mat-button-toggle (click)="applyFilter('none')">Aucun</mat-button-toggle>
+        <mat-button-toggle (click)="applyFilter('brightness(40%)')">Sombre</mat-button-toggle>
+        <mat-button-toggle (click)="applyFilter('sepia(100%)')">Sepia</mat-button-toggle>
+        <mat-button-toggle (click)="applyFilter('grayscale(100%)')">Noir et blanc</mat-button-toggle>
+        <mat-button-toggle (click)="applyFilter('invert(100%)')">Inverser</mat-button-toggle>
+        <mat-button-toggle (click)="applyFilter('contrast(40%)')">Contraste</mat-button-toggle>
+    </mat-button-toggle-group>
+    <br />
+    <img class="preview" #imagePreview />
+</mat-dialog-content>
+
+<mat-dialog-actions align="end">
+    <button mat-button mat-dialog-close cdkFocusInitial (click)="cancel()">Annuler</button>
+    <button mat-button [disabled]="isDisabledDialog()" id="ctrl+e" (click)="sendDrawing()">Envoyer</button>
+</mat-dialog-actions>

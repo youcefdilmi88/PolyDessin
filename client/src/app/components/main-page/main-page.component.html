@@ -1,0 +1,62 @@
+<div class="container">
+    <div class="header-bar">
+        <h1 class="header-title">Bienvenue sur {{ title }}</h1>
+    </div>
+
+    <div class="container-actions">
+        <mat-grid-list class="grid-layout-custom" cols="2" rowHeight="2:1">
+            <mat-grid-tile>
+                <mat-grid-tile-header>1 - Créer un nouveau dessin</mat-grid-tile-header>
+                <button #createNewDrawingBtn mat-fab color="primary" aria-label="Créer un nouveau dessin" routerLink="/editor">
+                    <mat-icon>add</mat-icon>
+                </button>
+            </mat-grid-tile>
+
+            <mat-grid-tile>
+                <mat-grid-tile-header>2 - Ouvrir le carrousel de dessins stockés sur le serveur</mat-grid-tile-header>
+                <button (click)="openCarrouselDialog()" mat-fab color="accent" aria-label="Ouvrir le carrousel de dessins stockés sur le serveur">
+                    <mat-icon>view_carousel</mat-icon>
+                </button>
+            </mat-grid-tile>
+
+            <mat-grid-tile>
+                <mat-grid-tile-header>3 - Afficher le guide d'utilisation</mat-grid-tile-header>
+                <button (click)="openUserManualDialog()" mat-fab color="accent" aria-label="Afficher le guide d'utilisation">
+                    <mat-icon>menu_book</mat-icon>
+                </button>
+            </mat-grid-tile>
+
+            <mat-grid-tile>
+                <mat-grid-tile-header>4 - Continuer un dessin</mat-grid-tile-header>
+                <div class="continue-drawing-div">
+                    <button
+                        #continueDrawingBtn
+                        mat-fab
+                        color="primary"
+                        aria-label="Continuer un dessin"
+                        class="continue-button"
+                        (click)="continueDrawing()"
+                        routerLink="/editor"
+                        [ngStyle]="{ cursor: autosaveService.isDrawingInProgress() ? 'default' : 'not-allowed' }"
+                        [disabled]="!autosaveService.isDrawingInProgress()"
+                    >
+                        <mat-icon>create</mat-icon>
+                    </button>
+
+                    <div class="continue-drawing-info-text-div">
+                        <mat-icon>info</mat-icon>
+                        <div class="continue-drawing-info-text">
+                            <p *ngIf="autosaveService.isDrawingInProgress(); else noDrawingInProgress">{{ drawingInProgressText }}</p>
+                            <ng-template #noDrawingInProgress> {{ noDrawingInProgressText }} </ng-template>
+                        </div>
+                    </div>
+                </div>
+            </mat-grid-tile>
+        </mat-grid-list>
+    </div>
+
+    <div class="footer-item">
+        <h4 class="team-name">LOG2990 - Équipe 109</h4>
+        <p>Andrew Abdo, Wissale Achkanou, Paul Corrand, Malek Demdoum, Youcef Dilmi (abandon pour cause médicale)</p>
+    </div>
+</div>

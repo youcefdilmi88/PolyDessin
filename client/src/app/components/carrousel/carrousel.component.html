@@ -1,0 +1,156 @@
+<mat-dialog-content [ngStyle]="{ width: dialogWidth() }" class="dialog">
+    <div *ngIf="!isFetched" class="spinner-carrousel"><mat-spinner></mat-spinner></div>
+    <div *ngIf="!isFetched" class="waiting-message">En attente du serveur</div>
+    <div *ngIf="isFetched" #carrouselContainer [ngStyle]="{ width: carrouselContainerWidth() }" class="carrousel-container">
+        <div class="carrousel-inner">
+            <div #track class="track">
+                <div
+                    [ngStyle]="{ cursor: cards.length <= 3 ? 'pointer' : 'auto' }"
+                    (click)="selectLeftDrawing()"
+                    *ngIf="cards.length >= 1"
+                    class="card-container"
+                >
+                    <div class="card">
+                        <div class="img"><img [src]="cards[indexLeft].imageData" alt="" /></div>
+
+                        <div class="info">
+                            Titre: {{ cards[indexLeft].title }}
+                            <button [disabled]="indexLeft != selectedIndex" (click)="loadDrawing()" class="info-button" mat-mini-fab color="primary">
+                                <mat-icon>create</mat-icon>
+                            </button>
+                            <button
+                                (click)="deleteDrawing()"
+                                [disabled]="indexLeft != selectedIndex"
+                                class="info-button"
+                                mat-mini-fab
+                                color="primary"
+                            >
+                                <mat-icon>delete</mat-icon>
+                            </button>
+                            <div class="tags">
+                                <p>Tags:</p>
+                                <mat-chip-list class="remove-selection">
+                                    <mat-chip *ngFor="let tag of cards[indexLeft].tags">{{ tag }}</mat-chip>
+                                    <mat-chip *ngIf="cards[indexLeft].tags.length === 0">Aucun tags</mat-chip>
+                                </mat-chip-list>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div
+                    [ngStyle]="{ cursor: cards.length <= 3 ? 'pointer' : 'auto' }"
+                    (click)="selectMiddleDrawing()"
+                    *ngIf="cards.length > 1"
+                    class="card-container"
+                >
+                    <div class="card middle">
+                        <div class="img"><img [src]="cards[indexMiddle].imageData" alt="" /></div>
+                        <div class="info">
+                            <div>
+                                Titre: {{ cards[indexMiddle].title }}
+                                <button
+                                    [disabled]="indexMiddle != selectedIndex"
+                                    (click)="loadDrawing()"
+                                    class="info-button"
+                                    mat-mini-fab
+                                    color="primary"
+                                >
+                                    <mat-icon>create</mat-icon>
+                                </button>
+                                <button
+                                    (click)="deleteDrawing()"
+                                    [disabled]="indexMiddle != selectedIndex"
+                                    class="info-button"
+                                    mat-mini-fab
+                                    color="primary"
+                                >
+                                    <mat-icon>delete</mat-icon>
+                                </button>
+                            </div>
+                            <div class="tags">
+                                <p>Tags:</p>
+                                <mat-chip-list class="remove-selection">
+                                    <mat-chip *ngFor="let tag of cards[indexMiddle].tags">{{ tag }}</mat-chip>
+                                    <mat-chip *ngIf="cards[indexMiddle].tags.length === 0">Aucun tags</mat-chip>
+                                </mat-chip-list>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div
+                    [ngStyle]="{ cursor: cards.length <= 3 ? 'pointer' : 'auto' }"
+                    (click)="selectRightDrawing()"
+                    *ngIf="cards.length > 2"
+                    class="card-container"
+                >
+                    <div class="card">
+                        <div class="img"><img [src]="cards[indexRight].imageData" alt="" /></div>
+                        <div class="info">
+                            Titre: {{ cards[indexRight].title }}
+                            <button [disabled]="indexRight != selectedIndex" (click)="loadDrawing()" class="info-button" mat-mini-fab color="primary">
+                                <mat-icon>create</mat-icon>
+                            </button>
+                            <button
+                                (click)="deleteDrawing()"
+                                [disabled]="indexRight != selectedIndex"
+                                class="info-button"
+                                mat-mini-fab
+                                color="primary"
+                            >
+                                <mat-icon>delete</mat-icon>
+                            </button>
+                            <div class="tags">
+                                <p>Tags:</p>
+                                <mat-chip-list class="remove-selection">
+                                    <mat-chip *ngFor="let tag of cards[indexRight].tags">{{ tag }}</mat-chip>
+                                    <mat-chip *ngIf="cards[indexRight].tags.length === 0">Aucun tags</mat-chip>
+                                </mat-chip-list>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div *ngIf="cards.length === 0" class="card-container">
+                    <div class="card">
+                        <div class="img">Aucun dessin</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div [ngStyle]="{ left: selectedPosition() }" *ngIf="cards.length > 0" class="arrow-container">
+            <mat-icon class="arrow">arrow_upward</mat-icon>
+        </div>
+        <div class="search" *ngIf="cards.length > 0">
+            <p>
+                <mat-form-field class="search-title">
+                    <mat-label>Recherche par tags</mat-label>
+                    <input
+                        matInput
+                        placeholder="Nouveau tag..."
+                        [matChipInputFor]="chipList"
+                        [matChipInputSeparatorKeyCodes]="separatorKeysCodes"
+                        [matChipInputAddOnBlur]="addOnBlur"
+                        (matChipInputTokenEnd)="add($event)"
+                        [formControl]="tagFormControl"
+                        [errorStateMatcher]="matcher"
+                    />
+                    <mat-error *ngIf="tagFormControl.hasError('maxlength')">Max 9 caractères</mat-error>
+                    <mat-error *ngIf="tagFormControl.hasError('pattern')">Chiffres ou lettres, sans espaces</mat-error>
+                </mat-form-field>
+            </p>
+            <mat-chip-list class="search-chip-list" #chipList aria-label="tag selection">
+                <mat-chip *ngFor="let tag of tags" [selectable]="selectable" [removable]="removable" (removed)="remove(tag)">
+                    {{ tag }}
+                    <mat-icon matChipRemove *ngIf="removable">cancel</mat-icon>
+                </mat-chip>
+            </mat-chip-list>
+            <button class="search-button" (click)="searchForTags()" mat-raised-button>Rechercher</button>
+        </div>
+        <mat-dialog-actions align="center" *ngIf="cards.length === 0">
+            <button mat-raised-button mat-dialog-close>OK</button>
+        </mat-dialog-actions>
+        <div *ngIf="cards.length > 3" class="nav">
+            <button #prev (click)="prevClick()" class="prev"><mat-icon>keyboard_arrow_left</mat-icon></button>
+            <button #next (click)="nextClick()" class="next"><mat-icon>keyboard_arrow_right</mat-icon></button>
+        </div>
+    </div>
+</mat-dialog-content>

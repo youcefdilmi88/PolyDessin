@@ -1,0 +1,79 @@
+canvas {
+    cursor: crosshair;
+    border-top: 2px solid white;
+    border-right: 2px solid white;
+    border-bottom: 2px solid white;
+    position: absolute;
+    left: 0px;
+    top: 0px;
+}
+
+#canvas {
+    z-index: 0;
+    background-color: white;
+}
+
+.grid {
+    position: absolute;
+    left: 0;
+    top: 0;
+}
+
+#previewLayer {
+    z-index: 1;
+}
+
+#canvas-container {
+    position: relative;
+}
+
+#right-grabber {
+    position: absolute;
+    height: 100px;
+    width: 5px;
+    background-color: #555;
+    cursor: ew-resize;
+    opacity: 50%;
+}
+
+#bottom-grabber {
+    position: absolute;
+    width: 100px;
+    height: 5px;
+    background-color: #555;
+    cursor: ns-resize;
+    opacity: 50%;
+}
+
+#corner-grabber {
+    position: absolute;
+    background-color: #555;
+    width: 10px;
+    height: 10px;
+    opacity: 50%;
+    cursor: nwse-resize;
+}
+
+button {
+    background: transparent;
+    box-shadow: 0px 0px 0px transparent;
+    border: 0px solid transparent;
+    text-shadow: 0px 0px 0px transparent;
+    padding: 0;
+}
+
+button:hover {
+    background: transparent;
+    box-shadow: 0px 0px 0px transparent;
+    border: 0px solid transparent;
+    text-shadow: 0px 0px 0px transparent;
+}
+
+button:active {
+    outline: none;
+    border: none;
+}
+
+button:focus {
+    outline: 0;
+}

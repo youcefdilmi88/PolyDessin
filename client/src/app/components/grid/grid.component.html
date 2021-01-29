@@ -1,0 +1,12 @@
+<div [ngStyle]="{ width: getHorizontalLineLength(), height: getVerticalLineLength() }" *ngIf="this.toolManagerService.isGridOn">
+    <div
+        [ngStyle]="{ height: getVerticalLineLength(), width: '1px', left: verticalLineOffset, opacity: getGridOpacity() }"
+        class="line"
+        *ngFor="let verticalLineOffset of verticalLineArray()"
+    ></div>
+    <div
+        [ngStyle]="{ width: getHorizontalLineLength(), height: '1px', top: horizontalLineOffset, opacity: getGridOpacity() }"
+        class="line"
+        *ngFor="let horizontalLineOffset of horizontalLineArray()"
+    ></div>
+</div>
